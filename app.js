@@ -48,3 +48,7 @@ app.use(baseUrl, link);
 app.use((req, res, next) => {
   res.status(statusCode.notfound).json(errorMessage())
 });
+
+export {
+  app
+}

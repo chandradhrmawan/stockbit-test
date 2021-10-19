@@ -1,16 +1,25 @@
 import { getMovieApi } from "../services/apiServices.js"
-import { errorMessage, statusCode, successMessage } from "../helpers/statusHelpers.js"
+import { errorMessage, statusCode, successMessage, emptyMessage } from "../helpers/statusHelpers.js"
 
 const getMovie = async (req, res) => {
     try {
 
         let { Title } = req.query
 
-        let data = await getMovieApi('s', Title)
+        await getMovieApi('s', Title).then(resp => {
 
-        res.status(statusCode.success).json(successMessage(data))
+            if (resp.Response == 'False') {
+                return res.status(statusCode.notfound).json(emptyMessage())
+            }
+
+            return res.status(statusCode.success).json(successMessage(resp))
+
+        }).catch(err => {
+            return res.status(statusCode.bad).json(errorMessage(err.message))
+        })
+
     } catch (err) {
-        res.status(statusCode.bad).json(errorMessage(err.message))
+        return res.status(statusCode.bad).json(errorMessage(err.message))
     }
 };
 
@@ -19,11 +28,20 @@ const findMovie = async (req, res) => {
 
         let { imdbID } = req.query
 
-        let data = await getMovieApi('i', imdbID)
+        await getMovieApi('i', imdbID).then(resp => {
 
-        res.status(statusCode.success).json(successMessage(data))
+            if (resp.Response == 'False') {
+                return res.status(statusCode.notfound).json(emptyMessage())
+            }
+
+            return res.status(statusCode.success).json(successMessage(resp))
+
+        }).catch(err => {
+            return res.status(statusCode.bad).json(errorMessage(err.message))
+        })
+
     } catch (err) {
-        res.status(statusCode.bad).json(errorMessage(err.message))
+        return res.status(statusCode.bad).json(errorMessage(err.message))
     }
 };
 

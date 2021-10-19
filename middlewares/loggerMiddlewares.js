@@ -30,7 +30,7 @@ const logger = winston.createLogger({
     ),
     transports: [
         new winston.transports.File(options.file),
-        new winston.transports.Console(options.console)
+        // new winston.transports.Console(options.console)
     ],
     exitOnError: false, // exception
 });

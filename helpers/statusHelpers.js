@@ -14,7 +14,7 @@ const emptyMessage = ress => (
     {
 
         status: true,
-        message: 'Data tidak ditemukan',
+        message: 'Data Not Found',
         data: ress
     }
 );
