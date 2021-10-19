@@ -23,6 +23,7 @@
     "mysql2": "^2.3.0",
     "nodemon": "^2.0.13",
     "sanitize": "^2.1.0",
-    "sequelize": "^6.6.5"
+    "sequelize": "^6.6.5",
+    "winston": "^3.3.3"
   }
 }

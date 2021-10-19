@@ -4,9 +4,22 @@ import { errorMessage, statusCode, successMessage } from "../helpers/statusHelpe
 const getMovie = async (req, res) => {
     try {
 
-        let { type, searchParam } = req.query
+        let { Title } = req.query
 
-        let data = await getMovieApi(type, searchParam)
+        let data = await getMovieApi('s', Title)
+
+        res.status(statusCode.success).json(successMessage(data))
+    } catch (err) {
+        res.status(statusCode.bad).json(errorMessage(err.message))
+    }
+};
+
+const findMovie = async (req, res) => {
+    try {
+
+        let { imdbID } = req.query
+
+        let data = await getMovieApi('i', imdbID)
 
         res.status(statusCode.success).json(successMessage(data))
     } catch (err) {
@@ -15,5 +28,6 @@ const getMovie = async (req, res) => {
 };
 
 export {
-    getMovie
+    getMovie,
+    findMovie
 }

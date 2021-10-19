@@ -1,6 +1,6 @@
 import express from "express";
 import { getUserData } from "../controller/usersController.js";
-import { getMovie } from "../controller/omdbApiController.js";
+import { getMovie,findMovie } from "../controller/omdbApiController.js";
 import { getRefactorString } from "../controller/refactorController.js";
 import { checkAnagram } from "../controller/anagramController.js";
 
@@ -16,7 +16,8 @@ router.get('/users/get', getUserData);
  * omdb api
  * task no 2
 **/
-router.get('/omdb/get', getMovie);
+router.get('/omdb/search', getMovie);
+router.get('/omdb/detail', findMovie);
 
 /**
  * refactor code

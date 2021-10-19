@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import link from "./routers/index.js"
 import { errorMessage, statusCode, successMessage } from "./helpers/statusHelpers.js"
+import { loging } from "./middlewares/loggerMiddlewares.js"
 
 dotenv.config();
 
@@ -30,7 +31,10 @@ app.use(cors(corsOptions));
 
 app.use(cookieParser());
 
-app.get('', (req, res) => {
+app.use(loging);
+
+
+app.get('/', (req, res) => {
   res.status(statusCode.success).json(successMessage())
 })
 
