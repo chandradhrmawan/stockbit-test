@@ -5,6 +5,7 @@ const getRefactorString = async (req, res) => {
         let { str } = req.query
 
         res.status(statusCode.success).json(successMessage({
+            param: str,
             oldFunc: findFirstStringInBracket(str),
             newFunc: refactorFindFirstStringInBracket(str)
         }))
@@ -13,11 +14,11 @@ const getRefactorString = async (req, res) => {
     }
 };
 
-function refactorFindFirstStringInBracket(params) {
-    return params.split(new RegExp('\\((.*)\\)'));
+const refactorFindFirstStringInBracket = (str) => {
+    return (/\(([^)]+)\)/).exec(str)[1];
 }
 
-function findFirstStringInBracket(str) {
+const findFirstStringInBracket = (str) => {
     if (str.length > 0) {
         let indexFirstBracketFound = str.indexOf("(");
         if (indexFirstBracketFound >= 0) {
